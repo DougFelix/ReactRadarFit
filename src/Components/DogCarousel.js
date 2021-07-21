@@ -24,12 +24,12 @@ class DogCarousel extends Component {
                             <video
                             controls
                             loop
-                            className="d-block w-100 tales">
+                            className="d-block w-100 figure">
                                 <source src={item} type="video/mp4"></source>
                             </video>
                         ) : (
                             <img
-                            className="d-block w-100 tales"
+                            className="d-block w-100 figure"
                             src={item}
                             alt='dog'
                             />
@@ -48,7 +48,8 @@ class DogCarousel extends Component {
         let carouselList = this.mountCarouselItem();
 
         return (
-            <div>
+            <div className='DogCarousel'>
+                <div className='DogCarousel-Title'>Dog Carousel</div>
                 <div className='container-fluid'>
                     <Carousel>
                         {carouselList}
