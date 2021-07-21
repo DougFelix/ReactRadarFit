@@ -6,6 +6,11 @@ import axios from 'axios';
 import Carousel from 'react-bootstrap/Carousel'
 
 class DogCarousel extends Component {
+
+    static defaultProps = {
+        max: 10
+    }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -13,39 +18,69 @@ class DogCarousel extends Component {
         }
     }
 
+    componentDidMount(){
+        this.getDogs();
+    }
+
+    async getDogs(){
+        try {
+            let urls = [];
+            let count = 0;
+            while(count < this.props.max){
+                let data = await axios.get('https://random.dog/woof.json');
+                let dog = data.data.url;
+                urls.push(dog);
+                count++;
+            }
+            this.setState({data: urls});
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     isVideo (url) {
-        //TODO
+        if(url.endsWith('.mp4')) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     mountCarouselItem (){
         let list = [];
-        list = this.state.data.map(item =>
-            <Carousel.Item>
-                {this.isVideo(item) ? (
-                    <video controls autoPlay className="d-block w-100">
-                        <source src={item.url} type="video/mp4"></source>
-                    </video>
-                ) : (
-                    <img
-                    className="d-block w-100"
-                    src={item.url}
-                    alt='dog'
-                    />
-                )}
-                <Carousel.Caption>
-                    <h3>Dog</h3>
-                </Carousel.Caption>
-            </Carousel.Item>
-        );
+        if(Array.isArray(this.state.data) && this.state.data.length !== 0) {
+            list = this.state.data.map(item =>
+                <Carousel.Item>
+                    {this.isVideo(item) ? (
+                        <video
+                        controls
+                        autoPlay
+                        loop
+                        className="d-block w-100">
+                            <source src={item} type="video/mp4"></source>
+                        </video>
+                    ) : (
+                        <img
+                        className="d-block w-100"
+                        src={item}
+                        alt='dog'
+                        />
+                    )}
+                    <Carousel.Caption>
+                        <h3>Dog</h3>
+                    </Carousel.Caption>
+                </Carousel.Item>
+            );
+        }
         return list;
     }
 
     render() { 
-        let carouselList = this.mountCarouselItem(this.state.data);
+        let carouselList = this.mountCarouselItem();
 
         return (
             <div>
-                <div class='container-fluid' >  
+                <div className='container-fluid' >  
                     <div className="row title" style={{ marginBottom: "20px" }} >
                         <div className="col-sm-12"> 
                         Dog Carousel
