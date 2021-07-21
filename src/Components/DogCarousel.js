@@ -18,22 +18,26 @@ class DogCarousel extends Component {
     }
 
     mountCarouselItem (){
-        <Carousel.Item>
-            {item.videoURL ? (
-                <video controls autoPlay>
-                    <source src={'https://random.dog/d3cb771f-f861-4dd7-a672-2cff954a264b.mp4'} type="video/mp4"></source>
-                </video>
-            ) : (
-                <img
-                className="d-block w-100"
-                src={'https://random.dog/37d8a447-7ea0-4113-bcd6-3c123c55d648.gif'}
-                alt='1'
-                />
-            )}
-            <Carousel.Caption>
-                <h3>Third Demo</h3>
-            </Carousel.Caption>
-        </Carousel.Item>
+        let list = [];
+        list = this.state.data.map(item =>
+            <Carousel.Item>
+                {this.isVideo(item) ? (
+                    <video controls autoPlay className="d-block w-100">
+                        <source src={item.url} type="video/mp4"></source>
+                    </video>
+                ) : (
+                    <img
+                    className="d-block w-100"
+                    src={item.url}
+                    alt='dog'
+                    />
+                )}
+                <Carousel.Caption>
+                    <h3>Dog</h3>
+                </Carousel.Caption>
+            </Carousel.Item>
+        );
+        return list;
     }
 
     render() { 
