@@ -1,3 +1,17 @@
+# DOG CAROUSEL
+RadarFit Dog Carousel
+Fomos designados para construir um carousel aleatório com algumas fotos dos nossos queridos dogs.
+
+Esse carousel deve buscar informações aleatórias utilizando a API REST: https://random.dog/woof.json
+
+O objetivo desse teste é avaliar a qualidade de código.
+
+O teste é uma avaliação rápida, onde queremos ver clareza de código, componentização, boas práticas, consumo de API.
+
+<p align="center">
+  <img src="dogcarousel.gif" alt='14 - React Route Calculator'/>
+</p>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

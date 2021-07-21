@@ -5,6 +5,7 @@ import Carousel from 'react-bootstrap/Carousel'
 
 class DogCarousel extends Component {
 
+    // CHECK IF FILE IS VIDEO OR IMAGE
     isVideo (url) {
         if(url.endsWith('.mp4') || url.endsWith('.webm')) {
             return true;
@@ -12,15 +13,18 @@ class DogCarousel extends Component {
             return false;
         }
     }
-
+    
+    // MOUNT CAROULSEL USING API URLS
     mountCarouselItem (){
         let {data} = this.props;
         let list = [];
+        // CHECK IF DATA ISN'T EMPTY
         if(Array.isArray(data) && data.length !== 0) {
             list = data.map(item =>
                <Carousel.Item key={uuidv4()}>
                     <div className="container carousel-inner">
                         {this.isVideo(item) ? (
+                            // VIDEO FORMAT
                             <video
                             controls
                             loop
@@ -28,6 +32,7 @@ class DogCarousel extends Component {
                                 <source src={item} type="video/mp4"></source>
                             </video>
                         ) : (
+                            // IMAGE FORMAT
                             <img
                             className="d-block w-100 figure"
                             src={item}
@@ -36,7 +41,7 @@ class DogCarousel extends Component {
                         )}
                     </div>
                     <Carousel.Caption>
-                        <h3>Dog</h3>
+                        <h3>DOG</h3>
                     </Carousel.Caption>
                 </Carousel.Item>
             );
@@ -44,7 +49,8 @@ class DogCarousel extends Component {
         return list;
     }
 
-    render() { 
+    render() {
+        // CREATING CAROUSEL
         let carouselList = this.mountCarouselItem();
 
         return (
