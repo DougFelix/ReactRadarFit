@@ -1,10 +1,10 @@
 import './App.css';
-import DogCarousel from './Components/DogCarousel';
+import Home from './Components/Home';
 
 function App() {
   return (
     <div className="App">
-      <DogCarousel/>
+      <Home/>
     </div>
   );
 }
